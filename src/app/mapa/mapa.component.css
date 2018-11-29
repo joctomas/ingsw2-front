@@ -1,0 +1,12 @@
+:host{
+
+  height: 100vh;
+}
+
+.weaSVG{
+  background-color: aquamarine;
+}
+
+.map__container{
+  height: inherit;
+}

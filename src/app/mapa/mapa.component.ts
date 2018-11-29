@@ -19,6 +19,9 @@ export class MapaComponent {
   ZOOM_THRESHOLD = [0.3, 7];
   WIDTH = window.innerWidth;
   HEIGHT = window.innerHeight;
+  OVERLAY_MULTIPLIER = 10;
+  OVERLAY_OFFSET = this.OVERLAY_MULTIPLIER / 2 - 0.5;
+  HOVER_COLOR = '#d36f80';
 
   radius = 5;
 
@@ -28,13 +31,31 @@ export class MapaComponent {
     console.log(points);
     const center = turf.center(points);
 
+    /*const zoom = d3
+    .zoom()
+    .scaleExtent(this.ZOOM_THRESHOLD)
+    .on('zoom', this.zoomHandler);*/
+
 
     const svg = d3.select('div')
       .append('svg')
       .attr('height', '100%')
-      .attr('width', '100%');
+      .attr('width', '100%')
+      .call(d3.zoom().on('zoom', function () {
+        svg.attr('transform', d3.event.transform);
+        }
+      )).append('g');
 
-    const g = svg.append('g');
+    /*this.g = svg.call(zoom).append('g');
+    this.g.append('rect')
+          .attr('width', this.WIDTH * this.OVERLAY_MULTIPLIER)
+          .attr('height', this.HEIGHT * this.OVERLAY_MULTIPLIER)
+          .attr(
+            'transform',
+            `translate(-${this.WIDTH * this.OVERLAY_OFFSET},-${this.HEIGHT * this.OVERLAY_OFFSET})`
+          )
+          .style('fill', 'none')
+          .style('pointer-events', 'all');*/
 
 
     const projection = d3.geoMercator()
@@ -46,7 +67,7 @@ export class MapaComponent {
     // const color = d3.scaleOrdinal(d3.schemeCategory20c.slice(1, 4));
 
 
-    g.append('g')
+      svg.append('g')
       .selectAll('path')
       .data(chile.features)
       .enter()
@@ -54,16 +75,19 @@ export class MapaComponent {
       .attr('fill', 'green')
       .attr('d', path)
       .attr('stroke', '#222')
-      .attr('stroke-width', '0.5');
+      .attr('stroke-width', '0.5')
+      .on('mouseover', this.mouseOverHandler)
+      .on('mouseout', this.mouseOutHandler)
+      .on('click', this.clicked);
 
 
 
   }
 
-  clicked(event: any) {
-    d3.select(event.target).append('circle')
-    .attr('cx', event.offsetX)
-    .attr('cy', event.offsetY)
+  clicked(d, i) {
+    d3.select(this).append('circle')
+    .attr('cx', d.offsetX)
+    .attr('cy', d.offsetY)
     .attr('r', () => {
       return this.radius;
     })
@@ -88,6 +112,20 @@ export class MapaComponent {
     return turf.featureCollection(a);
   }
 
+  mouseOverHandler(d, i) {
+    d3.select(this).attr('fill', this.HOVER_COLOR);
+
+  }
+
+  mouseOutHandler(d, i) {
+    d3.select(this).attr('fill', 'green');
+
+  }
+
+  /*zoomHandler() {
+    this.g.attr('transform', d3.event.transform);
+  }
+*/
 
 
 }

@@ -3,6 +3,7 @@ import * as turf from 'turf';
 import * as chile from './chile.json';
 
 import * as d3 from 'd3';
+import { disableDebugTools } from '@angular/platform-browser';
 
 
 
@@ -31,13 +32,10 @@ export class MapaComponent {
     console.log(points);
     const center = turf.center(points);
 
-    /*const zoom = d3
-    .zoom()
-    .scaleExtent(this.ZOOM_THRESHOLD)
-    .on('zoom', this.zoomHandler);*/
 
 
-    const svg = d3.select('div')
+
+    const svg = d3.select('.map__container')
       .append('svg')
       .attr('height', '100%')
       .attr('width', '100%')
@@ -46,25 +44,14 @@ export class MapaComponent {
         }
       )).append('g');
 
-    /*this.g = svg.call(zoom).append('g');
-    this.g.append('rect')
-          .attr('width', this.WIDTH * this.OVERLAY_MULTIPLIER)
-          .attr('height', this.HEIGHT * this.OVERLAY_MULTIPLIER)
-          .attr(
-            'transform',
-            `translate(-${this.WIDTH * this.OVERLAY_OFFSET},-${this.HEIGHT * this.OVERLAY_OFFSET})`
-          )
-          .style('fill', 'none')
-          .style('pointer-events', 'all');*/
 
 
     const projection = d3.geoMercator()
-      .center(center.geometry.coordinates)
+      .center([center.geometry.coordinates[0], center.geometry.coordinates[1] - 5])
       .scale(1000)
       .translate([this.WIDTH / 2, this.HEIGHT / 2]);
 
     const path = d3.geoPath().projection(projection);
-    // const color = d3.scaleOrdinal(d3.schemeCategory20c.slice(1, 4));
 
 
       svg.append('g')
@@ -74,24 +61,20 @@ export class MapaComponent {
       .append('path')
       .attr('fill', 'green')
       .attr('d', path)
-      .attr('stroke', '#222')
-      .attr('stroke-width', '0.5')
+      .attr('stroke', '#333')
+      .attr('stroke-width', '0.8')
       .on('mouseover', this.mouseOverHandler)
       .on('mouseout', this.mouseOutHandler)
-      .on('click', this.clicked);
+      .on('click', this.clickHandler);
 
 
 
   }
 
-  clicked(d, i) {
-    d3.select(this).append('circle')
-    .attr('cx', d.offsetX)
-    .attr('cy', d.offsetY)
-    .attr('r', () => {
-      return this.radius;
-    })
-    .attr('fill', 'red');
+  clickHandler(d, i) {
+    d3.select('.text__container').text(`Has seleccionado la region de ${d.properties.Region}`);
+
+    console.log(d);
   }
 
    getValue(object, path) {
@@ -121,11 +104,5 @@ export class MapaComponent {
     d3.select(this).attr('fill', 'green');
 
   }
-
-  /*zoomHandler() {
-    this.g.attr('transform', d3.event.transform);
-  }
-*/
-
 
 }

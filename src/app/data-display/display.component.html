@@ -1,2 +1,5 @@
-<h1>DATOS</h1>
-<h2>DATOS</h2>
+<h1 *ngIf="zoit.nombre != undefined" style="text-align: center">Datos de {{nombre_region}}</h1>
+<h1 *ngIf="zoit.nombre === undefined" style="text-align: center">Clickee un ZOIT</h1>
+<ul *ngIf="zoit.nombre != undefined">
+  <li *ngFor="let word of zoit.words">{{ word[0]+": "+word[1] }}</li>
+</ul>

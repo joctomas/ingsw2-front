@@ -1,4 +1,4 @@
-import { Component, AfterContentInit } from '@angular/core';
+import { Component, AfterContentInit, Output, EventEmitter} from '@angular/core';
 import * as turf from 'turf';
 import * as chile from './chile.json';
 
@@ -14,8 +14,8 @@ import { disableDebugTools } from '@angular/platform-browser';
   styleUrls: ['mapa.component.css']
 })
 
-export class MapaComponent {
-  constructor() { }
+export class MapaComponent implements AfterContentInit {
+
 
   ZOOM_THRESHOLD = [0.3, 7];
   WIDTH = window.innerWidth;
@@ -23,8 +23,11 @@ export class MapaComponent {
   OVERLAY_MULTIPLIER = 10;
   OVERLAY_OFFSET = this.OVERLAY_MULTIPLIER / 2 - 0.5;
   HOVER_COLOR = '#d36f80';
+  @Output() nombre_region = new EventEmitter<string>();
 
   radius = 5;
+
+  constructor() { }
 
   ngAfterContentInit() {
 
@@ -47,7 +50,7 @@ export class MapaComponent {
 
 
     const projection = d3.geoMercator()
-      .center([center.geometry.coordinates[0], center.geometry.coordinates[1] - 5])
+      .center([center.geometry.coordinates[0] + 40, center.geometry.coordinates[1] - 5])
       .scale(1000)
       .translate([this.WIDTH / 2, this.HEIGHT / 2]);
 
@@ -71,10 +74,11 @@ export class MapaComponent {
 
   }
 
-  clickHandler(d, i) {
+  clickHandler = (d, i) => {
     d3.select('.text__container').text(`Has seleccionado la region de ${d.properties.Region}`);
+    console.log(d.properties.Region);
+    this.nombre_region.emit(d.properties.Region);
 
-    console.log(d);
   }
 
    getValue(object, path) {

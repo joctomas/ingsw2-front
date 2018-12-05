@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'observatorio-front';
+  public nombreRegion: String;
+
+  onRegionAdded = (region: String) => {
+    this.nombreRegion = region;
+  }
 }

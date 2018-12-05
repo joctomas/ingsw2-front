@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatGridListModule } from '@angular/material';
+import { PapaParseModule } from 'ngx-papaparse';
+
 
 import { AppComponent } from './app.component';
 import { MapaComponent } from './mapa/mapa.component';
@@ -16,9 +17,9 @@ import { DataDisplayComponent } from './data-display/display.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    PapaParseModule,
   ],
   providers: [],
-  bootstrap: [AppComponent, MapaComponent, DataDisplayComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

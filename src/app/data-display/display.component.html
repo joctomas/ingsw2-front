@@ -1,5 +1,15 @@
-<h1 *ngIf="zoit.nombre != undefined" style="text-align: center">Datos de {{nombre_region}}</h1>
-<h1 *ngIf="zoit.nombre === undefined" style="text-align: center">Clickee un ZOIT</h1>
-<ul *ngIf="zoit.nombre != undefined">
-  <li *ngFor="let word of zoit.words">{{ word[0]+": "+word[1] }}</li>
-</ul>
+
+  <h1 *ngIf="zoit.nombre != undefined" style="text-align: center">Datos de {{nombre_region}}</h1>
+  <h1 *ngIf="zoit.nombre === undefined" style="text-align: center">Clickee un ZOIT</h1>
+  <app-selection-bar (render_graph1)="onGraphRender($event)"
+                     (render_graph2)="onGraphRender2($event)"
+                     (render_graph3)="onGraphRender3($event)"></app-selection-bar>
+  <hr>
+  <ul *ngIf="zoit.nombre != undefined">
+    <li *ngFor="let word of zoit.words">{{ word[0]+": "+word[1] }}</li>
+  </ul>
+  <app-g1 *ngIf="graph1_render"></app-g1>
+  <app-g2 *ngIf="graph2_render"></app-g2>
+  <app-g3 *ngIf="graph3_render"></app-g3>
+
+

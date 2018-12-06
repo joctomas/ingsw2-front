@@ -17,15 +17,16 @@ export class Zoit {
 
     if (nombre === 'Maule') {
 
-      this.words = [['kepaho', 2], ['zorra', 3], ['pico', 4], ['wacan', 1]];
+      this.words = [['kepaho', 2], ['wena', 3], ['kauros', 4], ['wacan', 1], ['lacheak', 60]];
     }
 
   }
 
-  pushData = () => {
-    data.forEach( (element) => {
+   pushData = () => {
+    data.forEach(element => {
       this.words.push([element.palabra, element.instancia]);
     });
   }
+
 
   }

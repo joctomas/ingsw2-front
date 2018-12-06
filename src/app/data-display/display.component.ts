@@ -10,6 +10,7 @@ export class DataDisplayComponent implements OnInit, OnChanges {
 
   @Input() nombre_region: String;
   public zoit: Zoit;
+
   graph1_render = false;
   graph2_render = false;
   graph3_render = false;
@@ -24,6 +25,7 @@ export class DataDisplayComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.zoit = new Zoit(this.nombre_region, 120);
+
   }
 
   onGraphRender = (render_bool) => {
@@ -47,6 +49,7 @@ export class DataDisplayComponent implements OnInit, OnChanges {
       this.graph1_render = false;
     }
   }
+
 
 
 

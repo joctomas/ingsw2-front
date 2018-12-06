@@ -21,7 +21,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/futaleufu.csv"
+              "src/futaleufu.csv",
+              "src/futaleufu_sentiment.csv"
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",

@@ -1,3 +1,8 @@
+# Primer Paso
+
+En consola, navegar hasta la carpeta del proyecto "observatorio-front" y correr el comando "npm install".
+Instalará todas las dependencias de node para que el proyecto funcione, luego de que instale todo correr "ng serve".
+
 # ObservatorioFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.1.

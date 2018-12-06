@@ -5,11 +5,55 @@
                      (render_graph2)="onGraphRender2($event)"
                      (render_graph3)="onGraphRender3($event)"></app-selection-bar>
   <hr>
-  <ul *ngIf="zoit.nombre != undefined">
-    <li *ngFor="let word of zoit.words">{{ word[0]+": "+word[1] }}</li>
-  </ul>
-  <app-g1 *ngIf="graph1_render"></app-g1>
+  <app-g1 *ngIf="graph1_render" [zoit_grafico1]="zoit"></app-g1>
   <app-g2 *ngIf="graph2_render"></app-g2>
   <app-g3 *ngIf="graph3_render"></app-g3>
+  <hr>
+<div class="row" *ngIf="zoit.fecha != undefined">
+  <div class="col">
+    <div *ngIf="zoit.nombre != undefined" class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+      <div class="card-header">Twitt del dia</div>
+      <div class="card-body">
+        <h5 class="card-title">Fecha: {{ zoit.fecha }}</h5>
+        <p class="card-text">{{ zoit.totd }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div  *ngIf="zoit.n_positivos == zoit.n_max" class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header" style='background-color: chartreuse'>Analisis de Sentimiento: Positivo</div>
+      <div class="card-body">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [style.width]="zoit.neutral_porc + '%'" aria-valuenow="zoit.n_neutrales" aria-valuemin="0" aria-valuemax="zoit.full_progress">{{zoit.n_neutrales}}</div>
+          <div class="progress-bar bg-success" role="progressbar" [style.width]="zoit.positivo_porc + '%'" aria-valuenow="zoit.n_positivos" aria-valuemin="0" aria-valuemax="zoit.full_progress">{{zoit.n_positivos}}</div>
+          <div class="progress-bar bg-danger" role="progressbar" [style.width]="zoit.negativo_porc + '%'" aria-valuenow="zoit.n_negativos" aria-valuemin="0" aria-valuemax="zoit.full_progress">{{zoit.n_negativos}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div  *ngIf="zoit.n_negativos == zoit.n_max" class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header" style='background-color: crimson'>Analisis de Sentimiento: Negativo</div>
+      <div class="card-body">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [style.width]="zoit.neutral_porc + '%'" aria-valuenow="zoit.n_neutrales" aria-valuemin="zoit.n_min" aria-valuemax="zoit.full_progress">{{zoit.n_neutrales}}</div>
+          <div class="progress-bar bg-success" role="progressbar" [style.width]="zoit.positivo_porc + '%'" aria-valuenow="zoit.n_positivos" aria-valuemin="zoit.n_min" aria-valuemax="zoit.full_progress">{{zoit.n_positivos}}</div>
+          <div class="progress-bar bg-danger" role="progressbar" [style.width]="zoit.negativo_porc + '%'" aria-valuenow="zoit.n_negativos" aria-valuemin="zoit.n_min" aria-valuemax="zoit.full_progress">{{zoit.n_negativos}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="zoit.n_neutrales == zoit.n_max" class="card text-white bg-secondary mb-3" style="max-width: 18rem;" >
+      <div class="card-header">Analisis de Sentimiento: Neutral</div>
+      <div class="card-body">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [style.width]="zoit.neutral_porc + '%'" aria-valuenow="zoit.n_neutrales" aria-valuemin="0" aria-valuemax="zoit.full_progress">{{zoit.n_neutrales}}</div>
+          <div class="progress-bar bg-success" role="progressbar" [style.width]="zoit.positivo_porc + '%'" aria-valuenow="zoit.n_positivos" aria-valuemin="0" aria-valuemax="zoit.full_progress">{{zoit.n_positivos}}</div>
+          <div class="progress-bar bg-danger" role="progressbar" [style.width]="zoit.negativo_porc + '%'" aria-valuenow="zoit.n_negativos" aria-valuemin="0" aria-valuemax="zoit.full_progress">{{zoit.n_negativos}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 

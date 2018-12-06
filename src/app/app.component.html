@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col">
       <app-mapa (nombre_region)="onRegionAdded($event)"></app-mapa>
     </div>
-    <div class="col-md-8">
+    <div class="col-8">
       <app-data-display [nombre_region]="nombreRegion"></app-data-display>
     </div>
   </div>

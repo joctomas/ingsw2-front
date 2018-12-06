@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Zoit } from '../zoit.model';
 
 @Component({
   selector: 'app-g1',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class Grafico1Component implements OnInit {
+
+  @Input() zoit_grafico1: Zoit;
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {  }
 }

@@ -1,4 +1,5 @@
-import * as data from './futaleufu.json';
+
+import * as d3 from 'd3';
 export class Zoit {
   public nombre: String;
   public n_tweets: Number;
@@ -10,7 +11,7 @@ export class Zoit {
 
     if (nombre === 'Los Lagos') {
       this.words = [];
-      this.pushData();
+      this.pushCSV();
 
     // this.words = [['bueno', 2], ['malo', 3], ['paisaje', 4], ['bacan', 1]];
     }
@@ -22,11 +23,12 @@ export class Zoit {
 
   }
 
-   pushData = () => {
-    data.forEach(element => {
-      this.words.push([element.palabra, element.instancia]);
-    });
+  pushCSV = () => {
+    d3.csv('futaleufu.csv', (datos) => {
+      this.words.push([datos.palabra, datos.instancia]);
+      });
+    }
   }
 
 
-  }
+

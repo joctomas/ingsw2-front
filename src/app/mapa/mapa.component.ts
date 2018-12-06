@@ -76,7 +76,6 @@ export class MapaComponent implements AfterContentInit {
 
   clickHandler = (d, i) => {
     d3.select('.text__container').text(`Has seleccionado la region de ${d.properties.Region}`);
-    console.log(d.properties.Region);
     this.nombre_region.emit(d.properties.Region);
 
   }

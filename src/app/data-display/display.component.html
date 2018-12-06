@@ -5,9 +5,11 @@
                      (render_graph2)="onGraphRender2($event)"
                      (render_graph3)="onGraphRender3($event)"></app-selection-bar>
   <hr>
-  <app-g1 *ngIf="graph1_render" [zoit_grafico1]="zoit"></app-g1>
-  <app-g2 *ngIf="graph2_render"></app-g2>
-  <app-g3 *ngIf="graph3_render"></app-g3>
+  <div class="container">
+    <app-g1 *ngIf="graph1_render" [zoit_grafico1]="zoit"></app-g1>
+    <app-g2 *ngIf="graph2_render"></app-g2>
+  </div>
+
   <hr>
 <div class="row" *ngIf="zoit.fecha != undefined">
   <div class="col">

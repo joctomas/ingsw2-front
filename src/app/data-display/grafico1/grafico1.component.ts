@@ -8,8 +8,8 @@ import * as d3 from 'd3';
 })
 
 export class Grafico1Component implements OnInit, AfterContentInit {
-  public width = 1200;
-  public height = 750;
+  public width = 1000;
+  public height = 600;
   public sizeDivisor = 100;
   public nodePadding = 2.5;
   public simulation;
@@ -30,30 +30,58 @@ export class Grafico1Component implements OnInit, AfterContentInit {
     const simulation = this.forceSimulation(this.nodes).on("tick", this.ticked);
     this.simulation = simulation;
     this.svg = d3.select('.svg-unico').attr('height', this.height).attr('width', this.width)
-    .attr("viewBox", [-this.width / 2, -this.height / 2, this.width, this.height]);
+    .attr("viewBox", [-this.width / 2, -this.height / 2, this.width + 250, this.height + 220]);
 
+    this.node = this.svg.selectAll("g")
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 1.5)
+  .data(this.nodes)
+  .enter().append("g")
+  this.node.append("circle")
+    .attr("r", function(d){ return d[1]*10;})
+    .attr("fill", color)
+    .text(function(d){return 'hola';})
+    .attr("cx", function(d){ return d.x*2.5; })
+    .attr("cy", function(d){ return d.y*3; });
+  this.node.append("text")
+      .attr("x",function(d){return d.x*2.5;})
+      .attr("y",function(d){return d.y*3;})
+      .text(function(d){return d[0];});
+/*
     this.node = this.svg.append("g")
     .attr("stroke", "#fff")
     .attr("stroke-width", 1.5)
   .selectAll("circle")
   .data(this.nodes)
   .enter().append("circle")
-    .attr("r", function(d){ return d[1]*15;})
+    .attr("r", function(d){ return d[1]*10;})
     .attr("fill", color)
-    .text(function(d){return d[0];})
-    .attr("cx", function(d){ return d.x*2.5+350; })
-    .attr("cy", function(d){ return d.y*2.5+350; })
-    .call(d3.drag(simulation)
-    .on("start", this.dragstarted)
+    .text(function(d){return 'hola';})
+    .attr("cx", function(d){ return d.x; })
+    .attr("cy", function(d){ return d.y; });*/
+    //.call(d3.drag(simulation));
+    /*.on("start", this.dragstarted)
     .on("drag", this.dragged)
-    .on("end", this.dragended));
+    .on("end", this.dragended));*/
 
-    this.node.append('text')
+   /* this.node.append('text')
               .attr('x', function(d) {return d.x*2.5+350})
               .attr('y', function(d) {return d.y*2.5+350})
               .attr('fill', 'black')
-              .text(function(d){return d[0];});
-
+              .text(function(d){return 'hola';});*/
+    /*
+  this.node.append('g')
+            .selectAll('text')
+            .data(this.nodes)
+            .enter()
+            .append('text')
+            .attr('text-anchor', 'middle')
+            .attr('font-size', 8)
+            .attr('fill', 'black')
+            .attr('cx', (d) =>  d.x)
+            .attr('cy', (d) =>  d.y)
+            .text(d => (d[0]));
+    */
 
 
 
@@ -61,9 +89,9 @@ export class Grafico1Component implements OnInit, AfterContentInit {
 
   forceSimulation(nodes){
     return d3.forceSimulation(nodes)
-    .force("forceX", d3.forceX().strength(.5).x(this.width * .5))
-    .force("forceY", d3.forceY().strength(.5).y(this.height * .5))
-    .force("center", d3.forceCenter().x(this.width * .05).y(this.height * .05))
+    .force("forceX", d3.forceX().strength(.5).x(this.width * .0000009))
+    .force("forceY", d3.forceY().strength(.5).y(this.height * .0000009))
+    .force("center", d3.forceCenter().x(this.width * .0000009).y(this.height * .0000009))
     .force("charge", d3.forceManyBody().strength(-100));
   }
    dragstarted = (d) => {
@@ -86,7 +114,7 @@ export class Grafico1Component implements OnInit, AfterContentInit {
     d.size < 3 ? d.radius = 3 : d.radius = d.size;
     return d;
   }
-  ticked = (d) =>{
+  ticked = (d) => {
     this.node
     .attr("cx", function(d) {return d.x; })
     .attr("cy", function(d) {return d.y; });

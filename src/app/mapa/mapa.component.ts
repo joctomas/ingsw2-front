@@ -17,7 +17,7 @@ import { disableDebugTools } from '@angular/platform-browser';
 export class MapaComponent implements AfterContentInit {
 
 
-  ZOOM_THRESHOLD = [0.3, 7];
+  ZOOM_THRESHOLD = [0.5, 4];
   WIDTH = window.innerWidth;
   HEIGHT = window.innerHeight;
   OVERLAY_MULTIPLIER = 10;
@@ -42,7 +42,7 @@ export class MapaComponent implements AfterContentInit {
       .append('svg')
       .attr('height', '100%')
       .attr('width', '100%')
-      .call(d3.zoom().on('zoom', function () {
+      .call(d3.zoom().scaleExtent(this.ZOOM_THRESHOLD).on('zoom', function () {
         svg.attr('transform', d3.event.transform);
         }
       )).append('g');
@@ -50,8 +50,8 @@ export class MapaComponent implements AfterContentInit {
 
 
     const projection = d3.geoMercator()
-      .center([center.geometry.coordinates[0] + 40, center.geometry.coordinates[1] - 5])
-      .scale(1000)
+      .center([center.geometry.coordinates[0] + 35, center.geometry.coordinates[1]])
+      .scale(850)
       .translate([this.WIDTH / 2, this.HEIGHT / 2]);
 
     const path = d3.geoPath().projection(projection);

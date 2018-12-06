@@ -1,0 +1,20 @@
+html, body{
+  margin: 0;
+  height: 100%;
+  background-color: lightblue;
+}
+
+.node circle{
+  stroke: #3a403d;
+  stroke-width: .5px;
+}
+.node text{
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff
+}
+
+text{
+  font:54px "Helvetica Neua", Helvetica, Arial, sans-serif;
+  text-anchor:middle;
+  pointer-events: none;
+}

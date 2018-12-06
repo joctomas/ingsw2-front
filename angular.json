@@ -22,7 +22,13 @@
               "src/favicon.ico",
               "src/assets",
               "src/futaleufu.csv",
-              "src/futaleufu_sentiment.csv"
+              "src/futaleufu_palabras.csv",
+              "src/osorno.csv",
+              "src/osorno_palabras.csv",
+              "src/putre.csv",
+              "src/putre_palabras.csv",
+              "src/valparaiso.csv",
+              "src/valparaiso_palabras.csv"
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",

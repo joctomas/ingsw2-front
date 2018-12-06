@@ -26,22 +26,31 @@ export class Zoit {
     this.fecha = null;*/
     this.words = [];
 
-    if (nombre === 'Los Lagos') {
+    if (nombre === 'Los Rios') {
 
       this.pushCSV('futaleufu');
-      this.sentimentCSV('futaleufu_sentiment');
-
+      this.sentimentCSV('futaleufu');
     }
+    if (nombre === 'Valparaiso') {
 
-    if (nombre === 'Maule') {
+      this.pushCSV('valparaiso');
+      this.sentimentCSV('valparaiso');
+    }
+    if (nombre === 'Los Lagos') {
 
-      this.words = [['kepaho', 2], ['wena', 3], ['kauros', 4], ['wacan', 1], ['lacheak', 60]];
+      this.pushCSV('osorno');
+      this.sentimentCSV('osorno');
+    }
+    if (nombre === 'Arica y Parinacota') {
+
+      this.pushCSV('putre');
+      this.sentimentCSV('putre');
     }
 
   }
 
   pushCSV = (archivo: string) => {
-    d3.csv(archivo + '.csv', (datos) => {
+    d3.csv(archivo + '_palabras.csv', (datos) => {
       this.words.push([datos.palabra, datos.instancia]);
       });
     }
